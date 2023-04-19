@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@null"
+        android:iconTintMode="?attr/toggleCheckedStateOnClick"
+        android:icon="@drawable/ic_search"
+        />
+    <item
+        android:title="@null"
+        android:iconTintMode="?attr/toggleCheckedStateOnClick"
+        android:icon="@drawable/ic_cart"
+        />
+    <item
+        android:title="@null"
+        android:iconTint="@color/light_grey"
+        android:icon="@drawable/ic_favorite"
+        />
+    <item
+        android:title="@null"
+        android:iconTintMode="?attr/toggleCheckedStateOnClick"
+        android:icon="@drawable/ic_person"
+        />
+</menu>
