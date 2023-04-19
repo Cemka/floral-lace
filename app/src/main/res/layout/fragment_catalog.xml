@@ -80,7 +80,7 @@
                     app:layout_constraintWidth_percent="0.4" />
 
                 <TextView
-                    android:id="@+id/descriptionQr1"
+                    android:id="@+id/descriptionQrSec"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -91,13 +91,13 @@
                     app:layout_constraintTop_toBottomOf="@id/descriptionQr"
                     app:layout_constraintWidth_percent="0.4" />
 
-                <ImageButton
-                    android:id="@+id/qr_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/qrBtn"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_qr"
+                    android:background="@drawable/ic_qr"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -138,11 +138,25 @@
             android:id="@+id/sort"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/ic_filter"
+            android:background="@drawable/ic_sort"
             app:layout_constraintStart_toEndOf="@id/filter"
             app:layout_constraintTop_toBottomOf="@id/qrAll"
             app:layout_constraintEnd_toStartOf="@id/gl_end"
             android:layout_marginTop="10dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerCatalog"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintEnd_toStartOf="@id/gl_end"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_product"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
