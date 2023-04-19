@@ -1,8 +1,10 @@
-package ru.myitschool.florallace;
+package ru.myitschool.florallace.feature.main.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import ru.myitschool.florallace.R;
 
 public class MainActivity extends AppCompatActivity {
 

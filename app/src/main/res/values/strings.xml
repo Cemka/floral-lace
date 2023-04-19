@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">floral lace</string>
+    <string name="bonus">Ура, бонусы!</string>
+    <string name="collect_bonus">Накопить потратить</string>
+    <string name="bonus_forbuy">бонусы за покупку</string>
 </resources>
