@@ -30,7 +30,7 @@
             android:layout_marginTop="30dp"
             android:text="@string/name_cart"
             android:textColor="?attr/colorOnSecondary"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"

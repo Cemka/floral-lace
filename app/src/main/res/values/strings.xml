@@ -9,4 +9,9 @@
     <string name="name_currency">₽</string>
     <string name="name_sum_end">Итого:</string>
     <string name="favourite">Избранное</string>
+    <string name="name_profile">Профиль</string>
+    <string name="you_have">У вас</string>
+    <string name="name_bonus">бонус</string>
+    <string name="my_data">Мои данные</string>
+    <string name="name_about_app">О приложение</string>
 </resources>
