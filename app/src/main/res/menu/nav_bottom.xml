@@ -10,11 +10,7 @@
         android:iconTintMode="?attr/toggleCheckedStateOnClick"
         android:icon="@drawable/ic_cart"
         />
-    <item
-        android:title="@null"
-        android:iconTint="@color/light_grey"
-        android:icon="@drawable/ic_favorite"
-        />
+
     <item
         android:title="@null"
         android:iconTintMode="?attr/toggleCheckedStateOnClick"

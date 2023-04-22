@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_catalog">
         <action
             android:id="@+id/action_catalogFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/cartFragment" />
     </fragment>
 
     <fragment
-    android:id="@+id/profileFragment"
-    android:name="ru.myitschool.florallace.feature.profile.ui.ProfileFragment"
-    android:label="fragment_profile"
-    tools:layout="@layout/fragment_profile"/>
+    android:id="@+id/cartFragment"
+    android:name="ru.myitschool.florallace.feature.cart.ui.CartFragment"
+    android:label="fragment_cart"
+    tools:layout="@layout/fragment_cart"/>
 
 
 

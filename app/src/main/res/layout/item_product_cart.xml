@@ -24,22 +24,55 @@
             tools:src="@mipmap/ic_launcher" />
     </androidx.cardview.widget.CardView>
 
-    <!--todo доделать счетчик количества цветов-->
-    
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background=""/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_count"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:background="@drawable/layout_count"
+        app:layout_constraintStart_toEndOf="@id/imageLayout"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/text_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="15 шт"
+            android:textSize="12sp"
+            android:textColor="?attr/colorPrimaryVariant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_trash"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/like"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_favorite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="?attr/colorOnSurface"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageLayout"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/layout_count"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        android:layout_marginTop="5dp"
         tools:text="330 ₽" />
 
     <TextView
@@ -48,6 +81,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Эустома белая"
+        android:textSize="18sp"
         android:textColor="?attr/colorOnSecondary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageLayout"

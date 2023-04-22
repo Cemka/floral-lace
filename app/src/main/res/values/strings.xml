@@ -3,4 +3,10 @@
     <string name="bonus">Ура, бонусы!</string>
     <string name="collect_bonus">Накопить потратить</string>
     <string name="bonus_forbuy">бонусы за покупку</string>
+    <string name="reg_product">К оформлению</string>
+    <string name="name_cart">Корзина</string>
+    <string name="sum_end">6 270</string>
+    <string name="name_currency">₽</string>
+    <string name="name_sum_end">Итого:</string>
+    <string name="favourite">Избранное</string>
 </resources>
