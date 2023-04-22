@@ -11,6 +11,42 @@
         android:layout_height="match_parent"
         >
 
+        <TextView
+            android:id="@+id/empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_products"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/recyclerCatalog"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search"
+            />
+
+        <TextView
+            android:id="@+id/error"
+            android:text="@string/network_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/recyclerCatalog"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search"/>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/recyclerCatalog"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search"/>
+
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_start"
             android:layout_width="wrap_content"
@@ -43,16 +79,28 @@
                 app:layout_constraintGuide_percent="0.5" />
 
             <TextView
-                android:id="@+id/bonus"
+                android:id="@+id/bonus_up"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/bonus"
+                android:text="@string/bonus_up"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="48sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/bonus_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name_bonus_down"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="48sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bonus_up"
+                />
 
             <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -62,43 +110,68 @@
                 app:layout_constraintBottom_toBottomOf="@id/qrAll"
                 app:layout_constraintEnd_toEndOf="@id/qrAll"
                 app:layout_constraintStart_toStartOf="@id/gl_center"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="10dp">
 
                 <!--todo сделать нормальный цвет-->
-                <TextView
-                    android:id="@+id/descriptionQr"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/collect_bonus"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.4" />
 
-                <TextView
-                    android:id="@+id/descriptionQrSec"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/descriptions"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="@string/bonus_forbuy"
-                    android:textColor="@color/black_grey"
-                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/descriptionQr"
-                    app:layout_constraintWidth_percent="0.4" />
+                    app:layout_constraintEnd_toStartOf="@id/qrBtn"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="10dp"
+                    >
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/gl_center_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.8"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+                    <TextView
+                        android:id="@+id/descriptionQr"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/collect_bonus"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/gl_center_desc"
+                        app:layout_constraintBottom_toTopOf="@id/descriptionQrSec"
+                       />
+
+                    <TextView
+                        android:id="@+id/descriptionQrSec"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/bonus_forbuy"
+                        android:textColor="?attr/colorSecondaryVariant"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/gl_center_desc"
+                        app:layout_constraintTop_toBottomOf="@id/descriptionQr"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/qrBtn"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
                     android:background="@drawable/ic_qr"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginEnd="10dp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -114,9 +187,9 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search"
             android:layout_width="0dp"
-            app:layout_constraintWidth_percent="0.7"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/layout_search"
             app:animateMenuItems="true"
             app:layout_constraintEnd_toStartOf="@id/filter"
@@ -125,24 +198,24 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/filter"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_filter"
-            app:layout_constraintStart_toEndOf="@id/search"
-            app:layout_constraintTop_toBottomOf="@id/qrAll"
-            app:layout_constraintEnd_toStartOf="@id/sort"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
-            />
+            android:background="@drawable/ic_filter"
+            app:layout_constraintEnd_toStartOf="@id/sort"
+            app:layout_constraintStart_toEndOf="@id/search"
+            app:layout_constraintTop_toBottomOf="@id/qrAll" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sort"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_sort"
-            app:layout_constraintStart_toEndOf="@id/filter"
-            app:layout_constraintTop_toBottomOf="@id/qrAll"
-            app:layout_constraintEnd_toStartOf="@id/gl_end"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            />
+            android:background="@drawable/ic_sort"
+            app:layout_constraintEnd_toStartOf="@id/gl_end"
+            app:layout_constraintStart_toEndOf="@id/filter"
+            app:layout_constraintTop_toBottomOf="@id/qrAll" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerCatalog"

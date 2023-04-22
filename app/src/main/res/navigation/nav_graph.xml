@@ -3,23 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/catalogFragment">
+    app:startDestination="@id/navigation_catalog">
 
     <fragment
-        android:id="@+id/catalogFragment"
+        android:id="@+id/navigation_catalog"
         android:name="ru.myitschool.florallace.feature.catalog.ui.CatalogFragment"
         android:label="fragment_catalog"
-        tools:layout="@layout/fragment_catalog">
-        <action
-            android:id="@+id/action_catalogFragment_to_profileFragment"
-            app:destination="@id/cartFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_catalog"/>
 
     <fragment
-    android:id="@+id/cartFragment"
+    android:id="@+id/navigation_cart"
     android:name="ru.myitschool.florallace.feature.cart.ui.CartFragment"
     android:label="fragment_cart"
     tools:layout="@layout/fragment_cart"/>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="ru.myitschool.florallace.feature.profile.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile"/>
 
 
 

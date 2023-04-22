@@ -1,17 +1,21 @@
 <resources>
     <string name="app_name">floral lace</string>
-    <string name="bonus">Ура, бонусы!</string>
+    <string name="bonus_up">Ура,</string>
     <string name="collect_bonus">Накопить потратить</string>
     <string name="bonus_forbuy">бонусы за покупку</string>
     <string name="reg_product">К оформлению</string>
     <string name="name_cart">Корзина</string>
-    <string name="sum_end">6 270</string>
+    <string name="sum_end">0</string>
     <string name="name_currency">₽</string>
     <string name="name_sum_end">Итого:</string>
     <string name="favourite">Избранное</string>
     <string name="name_profile">Профиль</string>
     <string name="you_have">У вас</string>
-    <string name="name_bonus">бонус</string>
+    <string name="name_bonus">бонусов</string>
     <string name="my_data">Мои данные</string>
     <string name="name_about_app">О приложение</string>
+    <string name="count_bonus">0</string>
+    <string name="name_bonus_down">бонусы!</string>
+    <string name="no_products">Нет товаров</string>
+    <string name="network_error">Ошибка соединения</string>
 </resources>
