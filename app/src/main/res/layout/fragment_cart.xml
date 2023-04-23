@@ -52,7 +52,7 @@
             android:id="@+id/productReg"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:background="@drawable/layout_button_type_fir"
+            android:background="@drawable/bg_button_type_fir"
             android:text="@string/reg_product"
             android:textAllCaps="false"
             android:textSize="16sp"

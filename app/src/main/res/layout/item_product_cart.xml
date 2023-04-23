@@ -28,7 +28,7 @@
         android:id="@+id/layout_count"
         android:layout_width="40dp"
         android:layout_height="30dp"
-        android:background="@drawable/layout_count"
+        android:background="@drawable/bg_count"
         app:layout_constraintStart_toEndOf="@id/imageLayout"
         android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="parent">

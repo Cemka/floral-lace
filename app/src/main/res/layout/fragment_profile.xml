@@ -37,7 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/layout_showbonus"
+        android:background="@drawable/bg_showbonus"
         android:elevation="16dp"
         app:layout_constraintEnd_toStartOf="@id/gl_end"
         app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -88,7 +88,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/layout_profilebutton_type_1"
+        android:background="@drawable/bg_profilebutton_type_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/showBonus">
@@ -123,7 +123,7 @@
         android:id="@+id/buttonAboutApp"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="@drawable/layout_profilebutton_type_2"
+        android:background="@drawable/bg_profilebutton_type_2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/buttonData">
