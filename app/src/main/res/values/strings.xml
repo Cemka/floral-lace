@@ -18,4 +18,5 @@
     <string name="name_bonus_down">бонусы!</string>
     <string name="no_products">Нет товаров</string>
     <string name="network_error">Ошибка соединения</string>
+    <string name="name_count_last">осталось</string>
 </resources>
