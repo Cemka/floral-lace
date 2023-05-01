@@ -1,4 +1,4 @@
-package ru.myitschool.florallace.feature.catalog.presentation;
+package ru.myitschool.florallace.feature.catalog.presentation.catalog;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;

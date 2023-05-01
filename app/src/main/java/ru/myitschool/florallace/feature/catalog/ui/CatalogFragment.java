@@ -9,14 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
 import java.util.List;
 
 import ru.myitschool.florallace.databinding.FragmentCatalogBinding;
 import ru.myitschool.florallace.domain.model.Product;
-import ru.myitschool.florallace.feature.catalog.presentation.CatalogStatus;
-import ru.myitschool.florallace.feature.catalog.presentation.CatalogViewModel;
+import ru.myitschool.florallace.feature.catalog.presentation.catalog.CatalogStatus;
+import ru.myitschool.florallace.feature.catalog.presentation.catalog.CatalogViewModel;
+import ru.myitschool.florallace.feature.catalog.ui.dialog.ProductBottomSheetDialog;
 import ru.myitschool.florallace.feature.catalog.ui.recycler.CatalogAdapter;
 import ru.myitschool.florallace.feature.catalog.ui.recycler.CatalogClickListener;
 
@@ -25,6 +25,7 @@ public class CatalogFragment extends Fragment {
     CatalogViewModel viewModel;
     private FragmentCatalogBinding binding;
     private CatalogAdapter adapter;
+    private ProductBottomSheetDialog dialog;
 
 
     @Nullable
@@ -38,7 +39,16 @@ public class CatalogFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+/*
         adapter = new CatalogAdapter(v -> Navigation.findNavController(binding.getRoot()));
+*/
+        adapter = new CatalogAdapter(id -> {
+            dialog = new ProductBottomSheetDialog(id);
+            dialog.show(requireActivity().getSupportFragmentManager(), "product");
+
+        });
+
+
         binding.recyclerCatalog.setAdapter(adapter);
         viewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
         viewModel.products.observe(getViewLifecycleOwner(), this::renderProducts);
