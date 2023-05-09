@@ -42,5 +42,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.bottomNavBar, navController);
 
         new AllApiVolley(this).fillProduct();
+        new AllApiVolley(this).fillUser();
     }
 }
