@@ -1,6 +1,7 @@
 package ru.myitschool.florallace.feature.catalog.ui.dialog;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,7 +100,13 @@ public class ProductBottomSheetDialog extends BottomSheetDialogFragment {
         Glide.with(binding.getRoot()).load(item.getPhotoUrl()).into(binding.photo);
         binding.nameProduct.setText(item.getName());
         binding.price.setText(item.getPrice() + "");
+        if(item.getCountLast() < 20){
+            binding.countLast.setTextColor(Color.RED);
+            binding.nameCountLast.setTextColor(Color.RED);
+            binding.nameCount.setTextColor(Color.RED);
+        }
         binding.countLast.setText(Long.toString(item.getCountLast()));
+        binding.countStart.setText(item.getCountStart() + "");
         binding.description.setText(item.getDescription());
     }
 
