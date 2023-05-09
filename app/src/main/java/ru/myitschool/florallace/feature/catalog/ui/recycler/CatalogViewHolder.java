@@ -24,7 +24,7 @@ public class CatalogViewHolder extends ViewHolder {
     public void bind(Product item){
         Glide.with(binding.getRoot()).load(item.getPhotoUrl()).into(binding.image);
         binding.name.setText(item.getName());
-        binding.price.setText(item.getPrice());
+        binding.price.setText(item.getPrice() + "");
         binding.getRoot().setOnClickListener(v -> listener.onClick(item.getId()));
     }
 }

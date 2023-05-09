@@ -3,24 +3,42 @@ package ru.myitschool.florallace.domain.model;
 import androidx.annotation.NonNull;
 
 public class Product {
-    private long id;
+
+    private Long id;
     private String name;
+
     private String description;
-    private String price;
+
     private String photoUrl;
-    private long count;
 
+    private Integer price;
 
-    public Product(long id, String name, String description, String price, String photoUrl, long count) {
+    private Integer countLast;
+
+    private Integer countStart;
+
+    private String color;
+
+    public Product(Long id,
+                   String name,
+                   String description,
+                   String photoUrl,
+                   Integer price,
+                   Integer countLast,
+                   Integer countStart,
+                   String color) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.price = price;
         this.photoUrl = photoUrl;
-        this.count = count;
+        this.price = price;
+        this.countLast = countLast;
+        this.countStart = countStart;
+        this.color = color;
     }
 
-    public long getId() {
+
+    public Long getId() {
         return id;
     }
 
@@ -32,21 +50,37 @@ public class Product {
         return description;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
     public String getPhotoUrl() {
         return photoUrl;
     }
 
-    public long getCount() {
-        return count;
+    public Integer getPrice() {
+        return price;
     }
 
-    @NonNull
+    public Integer getCountLast() {
+        return countLast;
+    }
+
+    public Integer getCountStart() {
+        return countStart;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
     @Override
     public String toString() {
-        return name;
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", photoUrl='" + photoUrl + '\'' +
+                ", price=" + price +
+                ", countLast=" + countLast +
+                ", countStart=" + countStart +
+                ", color='" + color + '\'' +
+                '}';
     }
 }

@@ -13,11 +13,11 @@ public class ProductsRepository {
         return ProductApiService.getInstance().getProducts();
     }
 
-    public static Call<Product> getProduct(long id){
+    public static Call<Product> getProduct(Long id){
         return ProductApiService.getInstance().getProduct(id);
     }
 
-    public static Call<Void> deleteProduct(long id){
+    public static Call<Void> deleteProduct(Long id){
         return ProductApiService.getInstance().deleteProduct(id);
     }
 
