@@ -49,7 +49,7 @@ public class ProductBottomSheetDialog extends BottomSheetDialogFragment {
 
     public void load(long id){
         status = ProductDialogStatus.LOADING;
-        ProductsRepository.getProduct(id).enqueue(new Callback<Product>() {
+       /* ProductsRepository.getProduct(id).enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
                 status = ProductDialogStatus.LOADED;
@@ -64,7 +64,7 @@ public class ProductBottomSheetDialog extends BottomSheetDialogFragment {
                 renderStatus(status);
                 t.printStackTrace();
             }
-        });
+        });*/
     }
 
 
@@ -99,7 +99,7 @@ public class ProductBottomSheetDialog extends BottomSheetDialogFragment {
         Glide.with(binding.getRoot()).load(item.getPhotoUrl()).into(binding.photo);
         binding.nameProduct.setText(item.getName());
         binding.price.setText(item.getPrice());
-        binding.countLast.setText(Long.toString(item.getCount()));
+        binding.countLast.setText(Long.toString(item.getCountLast()));
         binding.description.setText(item.getDescription());
     }
 

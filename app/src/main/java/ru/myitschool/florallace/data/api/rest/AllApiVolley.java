@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import ru.myitschool.florallace.data.api.nodb.NoDb;
 import ru.myitschool.florallace.domain.mapper.ProductMapper;
 import ru.myitschool.florallace.domain.model.Product;
+import ru.myitschool.florallace.feature.catalog.presentation.catalog.CatalogViewModel;
 
 public class AllApiVolley implements AllApi{
 
@@ -33,7 +34,7 @@ public class AllApiVolley implements AllApi{
     @Override
     public void fillProduct() {
 
-        String url = BASE_URL + "/users";
+        String url = BASE_URL + "/product";
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
@@ -55,7 +56,6 @@ public class AllApiVolley implements AllApi{
                                 NoDb.PRODUCT_LIST.add(product);
                             }
 
-                            Log.d(API_TEST, NoDb.PRODUCT_LIST.toString());
                         }
                         catch (JSONException e) {
                             throw new RuntimeException(e);
