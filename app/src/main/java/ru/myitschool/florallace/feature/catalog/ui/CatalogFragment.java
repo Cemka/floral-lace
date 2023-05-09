@@ -38,7 +38,19 @@ public class CatalogFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+<<<<<<< Updated upstream
         adapter = new CatalogAdapter(v -> Navigation.findNavController(binding.getRoot()));
+=======
+
+        adapter = new CatalogAdapter(id -> {
+            dialog = new ProductBottomSheetDialog(id);
+            dialog.show(requireActivity().getSupportFragmentManager(), "product");
+
+        });
+
+
+
+>>>>>>> Stashed changes
         binding.recyclerCatalog.setAdapter(adapter);
         viewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
         viewModel.products.observe(getViewLifecycleOwner(), this::renderProducts);
