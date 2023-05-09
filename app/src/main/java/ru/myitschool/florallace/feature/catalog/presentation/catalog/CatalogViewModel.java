@@ -22,7 +22,7 @@ public class CatalogViewModel extends ViewModel {
     public LiveData<List<Product>> products = _products;
 
     public void load(){
-        /*_status.setValue(CatalogStatus.LOADING);
+        _status.setValue(CatalogStatus.LOADING);
         ProductsRepository.getProducts().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
@@ -35,6 +35,6 @@ public class CatalogViewModel extends ViewModel {
                 _status.setValue(CatalogStatus.FAILURE);
                 throwable.printStackTrace();
             }
-        });*/
+        });
     }
 }
