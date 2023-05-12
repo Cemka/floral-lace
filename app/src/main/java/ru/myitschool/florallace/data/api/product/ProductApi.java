@@ -7,6 +7,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import ru.myitschool.florallace.domain.model.Product;
+import ru.myitschool.florallace.domain.model.User;
 
 public interface ProductApi {
 
@@ -16,10 +17,20 @@ public interface ProductApi {
     @GET("product/{id}")
     Call<Product> getProduct(
             @Path("id")
-            long id);
+            long id
+    );
 
-    @DELETE("product/{id}")
-    Call<Void> deleteProduct(
-            @Path("id")
-            long id);
+    @GET("product/color/{color}")
+    Call<List<Product>> getProductsByColor(
+            @Path("color")
+            String color
+    );
+
+    @GET("product/name/{name}")
+    Call<Product> getProductByName(
+            @Path("name")
+            String name
+    );
+
+
 }

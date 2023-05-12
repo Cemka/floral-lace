@@ -86,5 +86,17 @@ public class User {
         return userOrder;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", phoneNumb='" + phoneNumb + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", countOfBonus=" + countOfBonus +
+                ", favouriteProducts=" + favouriteProducts +
+                ", productsInCart=" + productsInCart +
+                ", userOrder=" + userOrder +
+                '}';
+    }
 }

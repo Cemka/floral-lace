@@ -36,5 +36,7 @@ public class CatalogViewModel extends ViewModel {
                 throwable.printStackTrace();
             }
         });
+
+
     }
 }
