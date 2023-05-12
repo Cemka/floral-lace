@@ -19,4 +19,7 @@
     <string name="no_products">Нет товаров</string>
     <string name="network_error">Ошибка соединения</string>
     <string name="name_count_last">осталось</string>
+    <string name="name_counts">штук</string>
+    <string name="no_product">Такого товара не существует</string>
+    <string name="count_start_name">1 шт от</string>
 </resources>

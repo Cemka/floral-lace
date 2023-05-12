@@ -1,4 +1,4 @@
-package ru.myitschool.florallace.feature.catalog.presentation;
+package ru.myitschool.florallace.feature.catalog.presentation.catalog;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -15,10 +15,10 @@ import ru.myitschool.florallace.domain.model.Product;
 
 public class CatalogViewModel extends ViewModel {
 
-    private final MutableLiveData<CatalogStatus> _status = new MutableLiveData<>();
+    public final MutableLiveData<CatalogStatus> _status = new MutableLiveData<>();
     public LiveData<CatalogStatus> status = _status;
 
-    private final MutableLiveData<List<Product>> _products = new MutableLiveData<>();
+    public final MutableLiveData<List<Product>> _products = new MutableLiveData<>();
     public LiveData<List<Product>> products = _products;
 
     public void load(){

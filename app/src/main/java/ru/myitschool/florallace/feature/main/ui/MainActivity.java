@@ -7,6 +7,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +20,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import ru.myitschool.florallace.R;
-import ru.myitschool.florallace.data.api.product.ProductApiService;
 import ru.myitschool.florallace.databinding.ActivityMainBinding;
 import ru.myitschool.florallace.domain.model.Product;
 
@@ -33,22 +33,12 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+
         BottomNavigationView navigationView = findViewById(R.id.bottom_nav_bar);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(binding.bottomNavBar, navController);
 
-        ProductApiService.getInstance().getProducts().enqueue(new Callback<List<Product>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
-                assert response.body() != null;
-                Log.d("DEBUG", response.body().toString());
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Product>> call, @NonNull Throwable t) {
-                Log.d("DEBUG", "FAIL");
-            }
-        });
     }
 }

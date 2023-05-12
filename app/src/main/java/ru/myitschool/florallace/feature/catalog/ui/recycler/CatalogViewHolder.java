@@ -1,5 +1,6 @@
 package ru.myitschool.florallace.feature.catalog.ui.recycler;
 
+import android.graphics.Color;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -24,7 +25,13 @@ public class CatalogViewHolder extends ViewHolder {
     public void bind(Product item){
         Glide.with(binding.getRoot()).load(item.getPhotoUrl()).into(binding.image);
         binding.name.setText(item.getName());
-        binding.price.setText(item.getPrice());
+        binding.price.setText(item.getPrice() + "");
+        binding.countNum.setText(item.getCountStart() + "");
+        if(item.getCountLast() < 20){
+            binding.countLast.setTextColor(Color.RED);
+            binding.countLastNum.setTextColor(Color.RED);
+        }
+        binding.countLastNum.setText(item.getCountLast() + "");
         binding.getRoot().setOnClickListener(v -> listener.onClick(item.getId()));
     }
 }
