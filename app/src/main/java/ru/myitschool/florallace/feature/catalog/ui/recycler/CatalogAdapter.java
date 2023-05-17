@@ -26,7 +26,6 @@ public class CatalogAdapter extends Adapter<CatalogViewHolder> {
     @NonNull
     @Override
     public CatalogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         //create item's binding  of cartRecycler
         ItemProductBinding binding = ItemProductBinding.inflate(
                 LayoutInflater.from(parent.getContext()),

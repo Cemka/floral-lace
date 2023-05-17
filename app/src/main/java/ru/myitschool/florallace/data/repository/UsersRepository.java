@@ -3,7 +3,6 @@ package ru.myitschool.florallace.data.repository;
 import java.util.List;
 
 import retrofit2.Call;
-import ru.myitschool.florallace.data.api.user.UserApi;
 import ru.myitschool.florallace.data.api.user.UserApiService;
 import ru.myitschool.florallace.domain.model.User;
 

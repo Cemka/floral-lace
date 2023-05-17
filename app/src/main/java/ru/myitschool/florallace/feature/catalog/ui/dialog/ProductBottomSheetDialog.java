@@ -24,7 +24,7 @@ import ru.myitschool.florallace.feature.catalog.presentation.dialog.ProductDialo
 public class ProductBottomSheetDialog extends BottomSheetDialogFragment {
 
     private DialogBottomshetProductBinding binding;
-    private long id;
+    private final long id;
     private Product item;
     private ProductDialogStatus status;
 
@@ -34,7 +34,7 @@ public class ProductBottomSheetDialog extends BottomSheetDialogFragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DialogBottomshetProductBinding.inflate(inflater);
         return binding.getRoot();
@@ -52,7 +52,7 @@ public class ProductBottomSheetDialog extends BottomSheetDialogFragment {
         status = ProductDialogStatus.LOADING;
         ProductsRepository.getProduct(id).enqueue(new Callback<Product>() {
             @Override
-            public void onResponse(Call<Product> call, Response<Product> response) {
+            public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {
                 status = ProductDialogStatus.LOADED;
                 item = response.body();
                 renderStatus(status);
@@ -60,7 +60,7 @@ public class ProductBottomSheetDialog extends BottomSheetDialogFragment {
             }
 
             @Override
-            public void onFailure(Call<Product> call, Throwable t) {
+            public void onFailure(@NonNull Call<Product> call, @NonNull Throwable t) {
                 status = ProductDialogStatus.FAILURE;
                 renderStatus(status);
                 t.printStackTrace();
@@ -99,14 +99,14 @@ public class ProductBottomSheetDialog extends BottomSheetDialogFragment {
     public void render(Product item){
         Glide.with(binding.getRoot()).load(item.getPhotoUrl()).into(binding.photo);
         binding.nameProduct.setText(item.getName());
-        binding.price.setText(item.getPrice() + "");
+        binding.price.setText(Long.toString(item.getPrice()));
         if(item.getCountLast() < 20){
             binding.countLast.setTextColor(Color.RED);
             binding.nameCountLast.setTextColor(Color.RED);
             binding.nameCount.setTextColor(Color.RED);
         }
         binding.countLast.setText(Long.toString(item.getCountLast()));
-        binding.countStart.setText(item.getCountStart() + "");
+        binding.countStart.setText(Long.toString(item.getCountStart()));
         binding.description.setText(item.getDescription());
     }
 

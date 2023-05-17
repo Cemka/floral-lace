@@ -16,7 +16,7 @@ public class User {
 
     private List<Product> favouriteProducts;
 
-    private List<Product> productsInCart;
+    private List<CartItem> cartItems;
 
     private Order userOrder;
 
@@ -26,7 +26,7 @@ public class User {
                 String secondName,
                 Integer countOfBonus,
                 List<Product> favouriteProducts,
-                List<Product> productsInCart,
+                List<CartItem> cartItems,
                 Order userOrder) {
         this.id = id;
         this.phoneNumb = phoneNumb;
@@ -34,7 +34,7 @@ public class User {
         this.secondName = secondName;
         this.countOfBonus = countOfBonus;
         this.favouriteProducts = favouriteProducts;
-        this.productsInCart = productsInCart;
+        this.cartItems = cartItems;
         this.userOrder = userOrder;
     }
 
@@ -43,14 +43,14 @@ public class User {
                 String secondName,
                 Integer countOfBonus,
                 List<Product> favouriteProducts,
-                List<Product> productsInCart,
+                List<CartItem> cartItems,
                 Order userOrder) {
         this.phoneNumb = phoneNumb;
         this.firstName = firstName;
         this.secondName = secondName;
         this.countOfBonus = countOfBonus;
         this.favouriteProducts = favouriteProducts;
-        this.productsInCart = productsInCart;
+        this.cartItems = cartItems;
         this.userOrder = userOrder;
     }
 
@@ -78,8 +78,8 @@ public class User {
         return favouriteProducts;
     }
 
-    public List<Product> getProductsInCart() {
-        return productsInCart;
+    public List<CartItem> getCartItems() {
+        return cartItems;
     }
 
     public Order getUserOrder() {
@@ -95,7 +95,7 @@ public class User {
                 ", secondName='" + secondName + '\'' +
                 ", countOfBonus=" + countOfBonus +
                 ", favouriteProducts=" + favouriteProducts +
-                ", productsInCart=" + productsInCart +
+                ", productsInCart=" + cartItems +
                 ", userOrder=" + userOrder +
                 '}';
     }

@@ -39,9 +39,7 @@ public class CatalogFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-/*
-        adapter = new CatalogAdapter(v -> Navigation.findNavController(binding.getRoot()));
-*/
+
         adapter = new CatalogAdapter(id -> {
             dialog = new ProductBottomSheetDialog(id);
             dialog.show(requireActivity().getSupportFragmentManager(), "product");

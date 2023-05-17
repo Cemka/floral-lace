@@ -11,7 +11,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import ru.myitschool.florallace.data.repository.ProductsRepository;
+import ru.myitschool.florallace.data.repository.UsersRepository;
 import ru.myitschool.florallace.domain.model.Product;
+import ru.myitschool.florallace.domain.model.User;
+import ru.myitschool.florallace.feature.cart.presentation.CartStatus;
 
 public class CatalogViewModel extends ViewModel {
 
@@ -23,7 +26,7 @@ public class CatalogViewModel extends ViewModel {
 
     public void load(){
         _status.setValue(CatalogStatus.LOADING);
-        ProductsRepository.getProducts().enqueue(new Callback<List<Product>>() {
+        /*ProductsRepository.getProducts().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
                 _status.setValue(CatalogStatus.LOADED);
@@ -34,6 +37,22 @@ public class CatalogViewModel extends ViewModel {
             public void onFailure(@NonNull Call<List<Product>> call, @NonNull Throwable throwable) {
                 _status.setValue(CatalogStatus.FAILURE);
                 throwable.printStackTrace();
+            }
+        });*/
+
+        UsersRepository.getUserById(1L).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                _status.setValue(CatalogStatus.LOADED);
+                if(response.body() == null) {
+                    throw new RuntimeException("User not found");
+                }
+                _products.setValue(response.body().getFavouriteProducts());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable throwable) {
+                _status.setValue(CatalogStatus.FAILURE);
             }
         });
 

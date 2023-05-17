@@ -1,9 +1,8 @@
 package ru.myitschool.florallace.feature.catalog.ui.recycler;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.bumptech.glide.Glide;
@@ -22,16 +21,17 @@ public class CatalogViewHolder extends ViewHolder {
         this.listener = listener;
     }
 
+    @SuppressLint("SetTextI18n")
     public void bind(Product item){
         Glide.with(binding.getRoot()).load(item.getPhotoUrl()).into(binding.image);
         binding.name.setText(item.getName());
-        binding.price.setText(item.getPrice() + "");
-        binding.countNum.setText(item.getCountStart() + "");
+        binding.price.setText(Long.toString(item.getPrice()));
+        binding.countNum.setText(Long.toString(item.getCountStart()));
         if(item.getCountLast() < 20){
             binding.countLast.setTextColor(Color.RED);
             binding.countLastNum.setTextColor(Color.RED);
         }
-        binding.countLastNum.setText(item.getCountLast() + "");
+        binding.countLastNum.setText(Long.toString(item.getCountLast()));
         binding.getRoot().setOnClickListener(v -> listener.onClick(item.getId()));
     }
 }

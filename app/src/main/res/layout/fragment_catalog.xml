@@ -112,7 +112,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="10dp">
 
-                <!--todo сделать нормальный цвет-->
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/descriptions"

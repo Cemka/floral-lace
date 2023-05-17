@@ -12,5 +12,15 @@ public class OrdersRepository {
         return OrderApiService.instance().getOrders();
     }
 
-    // todo
+    public static Call<List<Order>> getOrdersByLocation(String location){
+        return OrderApiService.instance().getOrdersByLocation(location);
+    }
+
+    public static Call<List<Order>> getOrdersByTime(String time){
+        return OrderApiService.instance().getOrdersByTime(time);
+    }
+
+    public static Call<Order> getOrderById(Long id){
+        return OrderApiService.instance().getOrderById(id);
+    }
 }
