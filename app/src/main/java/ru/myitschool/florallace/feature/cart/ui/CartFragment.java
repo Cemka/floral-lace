@@ -1,5 +1,6 @@
 package ru.myitschool.florallace.feature.cart.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,31 +14,34 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import ru.myitschool.florallace.databinding.FragmentCartBinding;
 import ru.myitschool.florallace.domain.model.Product;
 import ru.myitschool.florallace.feature.cart.presentation.CartStatus;
 import ru.myitschool.florallace.feature.cart.presentation.CartViewModel;
+import ru.myitschool.florallace.feature.cart.presentation.FavListViewModel;
 import ru.myitschool.florallace.feature.cart.ui.cartrecycler.CartRecyclerAdapter;
+import ru.myitschool.florallace.feature.cart.ui.cartrecycler.CartRecyclerClickListener;
+import ru.myitschool.florallace.feature.cart.ui.favouriterecycler.FavouriteRecyclerAdapter;
 import ru.myitschool.florallace.feature.catalog.ui.dialog.ProductBottomSheetDialog;
 
 public class CartFragment extends Fragment {
 
     private FragmentCartBinding binding;
-
     private Long userId = 1L;
-
-    private CartViewModel viewModel;
-
-    private CartRecyclerAdapter adapter;
+    private CartViewModel cartViewModel;
+    private FavListViewModel favListViewModel;
+    private CartRecyclerAdapter cartAdapter;
+    private FavouriteRecyclerAdapter favAdapter;
 
     private ProductBottomSheetDialog dialog;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(CartViewModel.class);
+        cartViewModel = new ViewModelProvider(this).get(CartViewModel.class);
+        favListViewModel = new ViewModelProvider(this).get(FavListViewModel.class);
+
         binding = FragmentCartBinding.inflate(inflater);
         return binding.getRoot();
     }
@@ -45,15 +49,48 @@ public class CartFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        adapter = new CartRecyclerAdapter(id -> {
+        CartRecyclerClickListener listener = new CartRecyclerClickListener() {
+            @Override
+            public void onClick(Long id) {
+                dialog = new ProductBottomSheetDialog(id);
+                dialog.show(requireActivity().getSupportFragmentManager(), "product");
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDeleteClick(int id) {
+//                cartViewModel.deleteProductFromCart(userId, id);
+                cartViewModel.deleteCartItem(id, userId);
+                // Удалить элемент из списка данных
+                cartAdapter.removeProduct(id);
+                cartViewModel.load(userId);
+                // Обновить список
+                cartAdapter.notifyDataSetChanged();
+
+            }
+        };
+        cartAdapter = new CartRecyclerAdapter(listener);
+
+        favAdapter = new FavouriteRecyclerAdapter(id -> {
             dialog = new ProductBottomSheetDialog(id);
-            dialog.show(requireActivity().getSupportFragmentManager(), "product");
+            dialog.show(requireActivity().getSupportFragmentManager(), "favProduct");
         });
 
-        binding.cartRecycler.setAdapter(adapter);
-        viewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
-        viewModel.productsHash.observe(getViewLifecycleOwner(), this::renderProducts);
-        if(savedInstanceState == null) viewModel.load(userId);
+        binding.cartRecycler.setAdapter(cartAdapter);
+        binding.favouriteRecycler.setAdapter(favAdapter);
+        cartViewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
+        cartViewModel.productsHash.observe(getViewLifecycleOwner(), this::renderProducts);
+        cartViewModel.allPrice.observe(getViewLifecycleOwner(), this::setAllPrice);
+        favListViewModel.favProducts.observe(getViewLifecycleOwner(), this::renderFavProducts);
+        if(savedInstanceState == null) {
+            cartViewModel.load(userId);
+            favListViewModel.load(userId);
+        };
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setAllPrice(Integer integer) {
+        binding.sumEnd.setText(Integer.toString(integer));
     }
 
     private void renderStatus(CartStatus status){
@@ -81,7 +118,11 @@ public class CartFragment extends Fragment {
     private void renderProducts(HashMap<Product, Integer> productsMap){
         List<Product> products = new ArrayList<>(productsMap.keySet());
         binding.empty.setVisibility(products.isEmpty() ? View.VISIBLE : View.INVISIBLE);
-        adapter.setProducts(products, productsMap);
+        cartAdapter.setProducts(products, productsMap);
+    }
+
+    private void renderFavProducts(List<Product> favProducts){
+        favAdapter.setProducts(favProducts);
     }
 
     @Override

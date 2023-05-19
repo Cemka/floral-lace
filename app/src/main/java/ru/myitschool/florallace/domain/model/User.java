@@ -99,4 +99,8 @@ public class User {
                 ", userOrder=" + userOrder +
                 '}';
     }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
 }

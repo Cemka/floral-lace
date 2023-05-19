@@ -2,6 +2,8 @@ package ru.myitschool.florallace.domain.model;
 
 import androidx.annotation.NonNull;
 
+import java.util.Objects;
+
 public class Product {
 
     private Long id;
@@ -82,5 +84,18 @@ public class Product {
                 ", countStart=" + countStart +
                 ", color='" + color + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(description, product.description) && Objects.equals(photoUrl, product.photoUrl) && Objects.equals(price, product.price) && Objects.equals(countLast, product.countLast) && Objects.equals(countStart, product.countStart) && Objects.equals(color, product.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, photoUrl, price, countLast, countStart, color);
     }
 }

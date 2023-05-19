@@ -1,5 +1,7 @@
 package ru.myitschool.florallace.domain.model;
 
+import java.util.Objects;
+
 public class CartItem {
 
     private Long id;
@@ -33,5 +35,18 @@ public class CartItem {
                 ", product=" + product +
                 ", quantity=" + quantity +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CartItem cartItem = (CartItem) o;
+        return Objects.equals(id, cartItem.id) && Objects.equals(product, cartItem.product) && Objects.equals(quantity, cartItem.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, product, quantity);
     }
 }
