@@ -22,7 +22,6 @@ import ru.myitschool.florallace.data.repository.UsersRepository;
 import ru.myitschool.florallace.databinding.ActivityMainBinding;
 import ru.myitschool.florallace.domain.model.Product;
 import ru.myitschool.florallace.domain.model.User;
-import ru.myitschool.florallace.feature.ordermaking.presentation.NoDb;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -114,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 */
+
 
 
     }

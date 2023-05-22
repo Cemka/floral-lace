@@ -3,8 +3,11 @@ package ru.myitschool.florallace.data.api.order;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import ru.myitschool.florallace.domain.model.Order;
 
 public interface OrderApi {
@@ -29,4 +32,8 @@ public interface OrderApi {
             @Path("id")
             Long id
     );
+
+    @POST("orders/{order_items_id}")
+    Call<Order> insert(@Body Order order,
+                       @Query("order_items_id") List<Long> orderItemsIds);
 }

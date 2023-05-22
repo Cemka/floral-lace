@@ -21,8 +21,10 @@ import ru.myitschool.florallace.R;
 import ru.myitschool.florallace.databinding.FragmentMakingorderBinding;
 import ru.myitschool.florallace.domain.model.CartItem;
 import ru.myitschool.florallace.domain.model.User;
+import ru.myitschool.florallace.feature.main.ui.MainActivity;
 import ru.myitschool.florallace.feature.ordermaking.entity.OrderTime;
 import ru.myitschool.florallace.feature.ordermaking.presentation.OrderViewModel;
+import ru.myitschool.florallace.feature.ordermaking.ui.cartitemsrecycler.CartItemRecyclerAdapter;
 import ru.myitschool.florallace.feature.ordermaking.ui.timerecycler.OrderTimeRecyclerAdapter;
 import ru.myitschool.florallace.feature.ordermaking.ui.timerecycler.OrderTimeRecyclerClickListener;
 
@@ -30,9 +32,9 @@ public class OrderMakingFragment extends Fragment {
 
     private FragmentMakingorderBinding fragmentBinding;
     private OrderTimeRecyclerAdapter adapterTime;
+    private CartItemRecyclerAdapter cartItemAdapter;
     private OrderViewModel viewModel;
     private String time;
-
     private List<OrderTime> orderTimeList = new ArrayList<>();
 
     public void setTime(String time) {
@@ -84,7 +86,11 @@ public class OrderMakingFragment extends Fragment {
                 adapterTime.onItemClick(position);
             }
         };
-
+        fragmentBinding.nameFragment.setOnClickListener(v -> viewModel.insertOrder(
+                MainActivity.USER_ID,
+                123,
+                "testloc",
+                "testtime"));
         adapterTime = new OrderTimeRecyclerAdapter(listenerTime);
         adapterTime.setDefaultColor(Color.parseColor("#ACAAA8"));
         adapterTime.setSelectedColor(0xFF131313);
@@ -93,9 +99,16 @@ public class OrderMakingFragment extends Fragment {
                 .show());
         fragmentBinding.recyclerOrderItems.setAdapter(adapterTime);
         renderItems();
+
+        cartItemAdapter = new CartItemRecyclerAdapter();
+        fragmentBinding.orderItems.setAdapter(cartItemAdapter);
+
         viewModel.user.observe(getViewLifecycleOwner(), this::renderUserData);
         viewModel.cartItems.observe(getViewLifecycleOwner(), this::renderCartItems);
-        if(savedInstanceState == null) viewModel.loadUser();
+
+        viewModel.loadUser();
+        viewModel.loadCartItems();
+
 
     }
 
@@ -105,19 +118,25 @@ public class OrderMakingFragment extends Fragment {
         fragmentBinding = null;
     }
 
-    private void renderItems(){
+    private void renderItems() {
         adapterTime.setTimes(orderTimeList);
     }
 
-    private void renderUserData(User user){
+    private void renderUserData(User user) {
         String name = user.getFirstName() + " " + user.getSecondName();
         String phone = user.getPhoneNumb();
         fragmentBinding.dataRecName.setText(name);
         fragmentBinding.dataRecPhoneNum.setText(phone);
     }
 
-    private void renderCartItems(List<CartItem> cartItems){
 
+    private void renderCartItems(List<CartItem> cartItems) {
+        cartItemAdapter.setProducts(cartItems);
+        Integer allPrice = 0;
+        for(CartItem item : cartItems){
+            allPrice += item.getProduct().getPrice();
+        }
+        fragmentBinding.summaEnd.setText(Integer.toString(allPrice));
     }
 
 }

@@ -8,7 +8,7 @@ public class Order {
 
     private Long userId;
 
-    private List<Product> productList;
+    private List<OrderItem> productList;
 
     private Integer price;
 
@@ -18,7 +18,7 @@ public class Order {
 
     public Order(Long id,
                  Long userId,
-                 List<Product> productList,
+                 List<OrderItem> productList,
                  Integer price,
                  String location,
                  String time) {
@@ -31,7 +31,7 @@ public class Order {
     }
 
     public Order(Long userId,
-                 List<Product> productList,
+                 List<OrderItem> productList,
                  Integer price,
                  String location,
                  String time) {
@@ -50,7 +50,7 @@ public class Order {
         return userId;
     }
 
-    public List<Product> getProductList() {
+    public List<OrderItem> getProductList() {
         return productList;
     }
 

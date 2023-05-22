@@ -22,8 +22,8 @@ public class CartItemRecyclerViewHolder extends ViewHolder {
     public void bind(CartItem item){
         Product product = item.getProduct();
         Glide.with(binding.getRoot()).load(product.getPhotoUrl()).into(binding.image);
-        binding.name.setText(product.getPrice());
-        binding.textCount.setText(item.getQuantity());
+        binding.name.setText(product.getName());
+        binding.textCount.setText(Integer.toString(item.getQuantity()));
         int price = item.getQuantity() * product.getPrice();
         binding.price.setText(Integer.toString(price));
 

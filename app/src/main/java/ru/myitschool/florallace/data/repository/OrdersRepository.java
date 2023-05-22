@@ -23,4 +23,8 @@ public class OrdersRepository {
     public static Call<Order> getOrderById(Long id){
         return OrderApiService.instance().getOrderById(id);
     }
+
+    public static Call<Order> insert(Order order, List<Long> orderItemsIds){
+        return OrderApiService.instance().insert(order, orderItemsIds);
+    }
 }
