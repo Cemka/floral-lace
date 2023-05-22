@@ -9,20 +9,32 @@
         android:id="@+id/navigation_catalog"
         android:name="ru.myitschool.florallace.feature.catalog.ui.CatalogFragment"
         android:label="fragment_catalog"
-        tools:layout="@layout/fragment_catalog"/>
+        tools:layout="@layout/fragment_catalog" />
 
     <fragment
-    android:id="@+id/navigation_cart"
-    android:name="ru.myitschool.florallace.feature.cart.ui.CartFragment"
-    android:label="fragment_cart"
-    tools:layout="@layout/fragment_cart"/>
+        android:id="@+id/navigation_cart"
+        android:name="ru.myitschool.florallace.feature.cart.ui.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_navigation_cart_to_navigation_makingOrder"
+            app:destination="@id/navigation_makingOrder" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="ru.myitschool.florallace.feature.profile.ui.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile"/>
-
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/navigation_makingOrder"
+        android:name="ru.myitschool.florallace.feature.ordermaking.ui.OrderMakingFragment"
+        android:label="fragment_makingorder"
+        tools:layout="@layout/fragment_makingorder">
+        <action
+            android:id="@+id/action_navigation_makingOrder_to_navigation_cart2"
+            app:destination="@id/navigation_cart" />
+    </fragment>
 
 
 </navigation>

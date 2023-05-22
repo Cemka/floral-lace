@@ -10,11 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import ru.myitschool.florallace.R;
 import ru.myitschool.florallace.databinding.FragmentCartBinding;
 import ru.myitschool.florallace.domain.model.Product;
 import ru.myitschool.florallace.feature.cart.presentation.CartStatus;
@@ -25,11 +28,12 @@ import ru.myitschool.florallace.feature.cart.ui.cartrecycler.CartRecyclerClickLi
 import ru.myitschool.florallace.feature.cart.ui.favouriterecycler.FavouriteRecyclerAdapter;
 import ru.myitschool.florallace.feature.cart.ui.favouriterecycler.FavouriteRecyclerClickListener;
 import ru.myitschool.florallace.feature.dialog.ProductBottomSheetDialog;
+import ru.myitschool.florallace.feature.main.ui.MainActivity;
 
 public class CartFragment extends Fragment {
 
     private FragmentCartBinding binding;
-    private Long userId = 1L;
+    public static Long userId = MainActivity.USER_ID;
     private CartViewModel cartViewModel;
     private FavListViewModel favListViewModel;
     private CartRecyclerAdapter cartAdapter;
@@ -72,8 +76,6 @@ public class CartFragment extends Fragment {
                 cartViewModel.postFavItem(userId, id, getContext());
             }
         };
-        cartAdapter = new CartRecyclerAdapter(listener);
-
         FavouriteRecyclerClickListener favouriteClickListener = new FavouriteRecyclerClickListener() {
             @Override
             public void onClick(Long id) {
@@ -90,6 +92,14 @@ public class CartFragment extends Fragment {
             }
         };
 
+        binding.productReg.setOnClickListener(v -> {
+
+            NavController navController = Navigation.findNavController(v);
+            navController.navigate(R.id.action_navigation_cart_to_navigation_makingOrder);
+
+        });
+
+        cartAdapter = new CartRecyclerAdapter(listener);
         favAdapter = new FavouriteRecyclerAdapter(favouriteClickListener);
 
         binding.cartRecycler.setAdapter(cartAdapter);
@@ -107,7 +117,7 @@ public class CartFragment extends Fragment {
         binding.sumEnd.setText(Integer.toString(integer));
     }
 
-    private void renderStatus(CartStatus status){
+    private void renderStatus(CartStatus status) {
         switch (status) {
             case LOADING:
                 binding.cartRecycler.setVisibility(View.INVISIBLE);
@@ -129,13 +139,13 @@ public class CartFragment extends Fragment {
         }
     }
 
-    private void renderProducts(HashMap<Product, Integer> productsMap){
+    private void renderProducts(HashMap<Product, Integer> productsMap) {
         List<Product> products = new ArrayList<>(productsMap.keySet());
         binding.empty.setVisibility(products.isEmpty() ? View.VISIBLE : View.INVISIBLE);
         cartAdapter.setProducts(products, productsMap);
     }
 
-    private void renderFavProducts(List<Product> favProducts){
+    private void renderFavProducts(List<Product> favProducts) {
         favAdapter.setProducts(favProducts);
     }
 

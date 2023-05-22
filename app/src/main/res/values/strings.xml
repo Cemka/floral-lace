@@ -30,4 +30,14 @@
     <string name="count_start_name">1 шт от</string>
     <string name="name_last">осталось</string>
     <string name="name_counts_easy">шт</string>
+    <string name="order_making">Оформление заказа</string>
+    <string name="name_add">Добавить</string>
+    <string name="type_of_shoping">Самовывоз</string>
+    <string name="name_of_day">Сегодня</string>
+    <string name="type_of_shoping_cur">Курьер</string>
+    <string name="name_reciever">Получатель</string>
+    <string name="comma">,</string>
+    <string name="name_time">Заберу через:</string>
+    <string name="name_make_order">Оформить!</string>
+    <string name="order">Заказ</string>
 </resources>
