@@ -29,6 +29,7 @@ public class CartRecyclerViewHolder extends ViewHolder {
     public void bind(Product item,
                      HashMap<Product, Integer> hashMapItems
                      ){
+        int itemId = Integer.parseInt(Long.toString(item.getId()));
         Integer count = hashMapItems.get(item);
         if (count != null) {
             binding.textCount.setText(Integer.toString(count));
@@ -41,6 +42,7 @@ public class CartRecyclerViewHolder extends ViewHolder {
         binding.textCount.setText(Integer.toString(count));
         binding.price.setText(Long.toString(price));
         binding.getRoot().setOnClickListener(v -> listener.onClick(item.getId()));
-        binding.delete.setOnClickListener(v -> listener.onDeleteClick(Integer.parseInt(Long.toString(item.getId()))));
+        binding.delete.setOnClickListener(v -> listener.onDeleteClick(itemId));
+        binding.like.setOnClickListener(v -> listener.onFavClick(itemId));
     }
 }

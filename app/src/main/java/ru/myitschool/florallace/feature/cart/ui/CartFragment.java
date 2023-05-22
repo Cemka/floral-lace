@@ -23,7 +23,8 @@ import ru.myitschool.florallace.feature.cart.presentation.FavListViewModel;
 import ru.myitschool.florallace.feature.cart.ui.cartrecycler.CartRecyclerAdapter;
 import ru.myitschool.florallace.feature.cart.ui.cartrecycler.CartRecyclerClickListener;
 import ru.myitschool.florallace.feature.cart.ui.favouriterecycler.FavouriteRecyclerAdapter;
-import ru.myitschool.florallace.feature.catalog.ui.dialog.ProductBottomSheetDialog;
+import ru.myitschool.florallace.feature.cart.ui.favouriterecycler.FavouriteRecyclerClickListener;
+import ru.myitschool.florallace.feature.dialog.ProductBottomSheetDialog;
 
 public class CartFragment extends Fragment {
 
@@ -52,29 +53,44 @@ public class CartFragment extends Fragment {
         CartRecyclerClickListener listener = new CartRecyclerClickListener() {
             @Override
             public void onClick(Long id) {
-                dialog = new ProductBottomSheetDialog(id);
+                dialog = new ProductBottomSheetDialog(id, userId);
                 dialog.show(requireActivity().getSupportFragmentManager(), "product");
             }
 
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDeleteClick(int id) {
-//                cartViewModel.deleteProductFromCart(userId, id);
                 cartViewModel.deleteCartItem(id, userId);
                 // Удалить элемент из списка данных
                 cartAdapter.removeProduct(id);
-                cartViewModel.load(userId);
                 // Обновить список
                 cartAdapter.notifyDataSetChanged();
+            }
 
+            @Override
+            public void onFavClick(int id) {
+                cartViewModel.postFavItem(userId, id, getContext());
             }
         };
         cartAdapter = new CartRecyclerAdapter(listener);
 
-        favAdapter = new FavouriteRecyclerAdapter(id -> {
-            dialog = new ProductBottomSheetDialog(id);
-            dialog.show(requireActivity().getSupportFragmentManager(), "favProduct");
-        });
+        FavouriteRecyclerClickListener favouriteClickListener = new FavouriteRecyclerClickListener() {
+            @Override
+            public void onClick(Long id) {
+                dialog = new ProductBottomSheetDialog(id, userId);
+                dialog.show(requireActivity().getSupportFragmentManager(), "favProduct");
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDeleteClick(int id) {
+                favListViewModel.deleteFromFavList((long) id, userId);
+                favAdapter.removeProduct(id);
+                favAdapter.notifyDataSetChanged();
+            }
+        };
+
+        favAdapter = new FavouriteRecyclerAdapter(favouriteClickListener);
 
         binding.cartRecycler.setAdapter(cartAdapter);
         binding.favouriteRecycler.setAdapter(favAdapter);
@@ -82,10 +98,8 @@ public class CartFragment extends Fragment {
         cartViewModel.productsHash.observe(getViewLifecycleOwner(), this::renderProducts);
         cartViewModel.allPrice.observe(getViewLifecycleOwner(), this::setAllPrice);
         favListViewModel.favProducts.observe(getViewLifecycleOwner(), this::renderFavProducts);
-        if(savedInstanceState == null) {
-            cartViewModel.load(userId);
-            favListViewModel.load(userId);
-        };
+        cartViewModel.load(userId);
+        favListViewModel.load(userId);
     }
 
     @SuppressLint("SetTextI18n")

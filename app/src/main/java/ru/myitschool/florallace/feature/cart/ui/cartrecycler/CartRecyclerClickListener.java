@@ -4,4 +4,6 @@ public interface CartRecyclerClickListener {
     void onClick(Long id);
 
     void onDeleteClick(int id);
+
+    void onFavClick(int id);
 }

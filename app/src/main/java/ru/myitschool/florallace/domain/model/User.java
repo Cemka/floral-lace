@@ -14,7 +14,7 @@ public class User {
 
     private Integer countOfBonus;
 
-    private List<Product> favouriteProducts;
+    private List<FavItem> favouriteProducts;
 
     private List<CartItem> cartItems;
 
@@ -25,7 +25,7 @@ public class User {
                 String firstName,
                 String secondName,
                 Integer countOfBonus,
-                List<Product> favouriteProducts,
+                List<FavItem> favouriteProducts,
                 List<CartItem> cartItems,
                 Order userOrder) {
         this.id = id;
@@ -42,7 +42,7 @@ public class User {
                 String firstName,
                 String secondName,
                 Integer countOfBonus,
-                List<Product> favouriteProducts,
+                List<FavItem> favouriteProducts,
                 List<CartItem> cartItems,
                 Order userOrder) {
         this.phoneNumb = phoneNumb;
@@ -74,7 +74,7 @@ public class User {
         return countOfBonus;
     }
 
-    public List<Product> getFavouriteProducts() {
+    public List<FavItem> getFavouriteProducts() {
         return favouriteProducts;
     }
 

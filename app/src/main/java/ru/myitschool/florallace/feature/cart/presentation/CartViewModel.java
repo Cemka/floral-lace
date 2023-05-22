@@ -1,25 +1,26 @@
 package ru.myitschool.florallace.feature.cart.presentation;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import ru.myitschool.florallace.data.api.order.OrderApiService;
 import ru.myitschool.florallace.data.repository.CartItemRepository;
-import ru.myitschool.florallace.data.repository.OrdersRepository;
-import ru.myitschool.florallace.data.repository.ProductsRepository;
+import ru.myitschool.florallace.data.repository.FavItemRepository;
 import ru.myitschool.florallace.data.repository.UsersRepository;
 import ru.myitschool.florallace.domain.model.CartItem;
+import ru.myitschool.florallace.domain.model.FavItem;
 import ru.myitschool.florallace.domain.model.Product;
 import ru.myitschool.florallace.domain.model.User;
 
@@ -70,69 +71,12 @@ public class CartViewModel extends ViewModel {
         });
     }
 
-    public void deleteProductFromCart(Long userId, int deleteItemId) {
-        UsersRepository.getUserById(userId).enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                if (response.isSuccessful()) {
-                    User user = response.body();
-                    if (user != null) {
-                        CartItemRepository.getCartItemById(userId, (long) deleteItemId).enqueue(new Callback<CartItem>() {
-                            @Override
-                            public void onResponse(Call<CartItem> call, Response<CartItem> response) {
-                                List<CartItem> cartItems = user.getCartItems();
-                                Log.d(API_TAG, "before delete: " + cartItems.toString());
-                                Log.d(API_TAG, "User before delete: " + user.toString());
-                                boolean temp = cartItems.remove(response.body());
-                                user.setCartItems(cartItems);
-                                Log.d(API_TAG, "onResponse: " + response.body());
-                                Log.d(API_TAG, "bol: " + Boolean.toString(temp));
-                                Log.d(API_TAG, "after delete: " + cartItems.toString());
-                                Log.d(API_TAG, "after before delete: " + user.toString());
-
-                                UsersRepository.updateUser(userId, user).enqueue(new Callback<User>() {
-                                    @Override
-                                    public void onResponse(Call<User> call, Response<User> response) {
-                                        if (response.isSuccessful()) {
-                                            Log.d(API_TAG, "Product deleted successfully from cart");
-                                        } else {
-                                            Log.d(API_TAG, "Failed to delete product from cart");
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<User> call, Throwable t) {
-                                        Log.d(API_TAG, "Failed to delete product from cart: " + t.getMessage());
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void onFailure(Call<CartItem> call, Throwable t) {
-
-                            }
-                        });
-                    } else {
-                        Log.d(API_TAG, "User not found");
-                    }
-                } else {
-                    Log.d(API_TAG, "Failed to retrieve user data");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.d(API_TAG, "Failed to retrieve user data: " + t.getMessage());
-            }
-        });
-    }
-
     public void deleteCartItem(int deleteItemId, Long userId) {
         Log.d(API_TAG, "deleteItemId" + deleteItemId);
         Log.d(API_TAG, "userId" + userId);
-        CartItemRepository.getCartItemById(userId, (long) deleteItemId).enqueue(new Callback<CartItem>() {
+        CartItemRepository.getCartItemByUserIdAndProductId(userId, (long) deleteItemId).enqueue(new Callback<CartItem>() {
             @Override
-            public void onResponse(Call<CartItem> call, Response<CartItem> response) {
+            public void onResponse(@NonNull Call<CartItem> call, @NonNull Response<CartItem> response) {
                 Log.d(API_TAG, "deleteItemId!" + deleteItemId);
                 Log.d(API_TAG, "userId!" + userId);
                 Log.d(API_TAG, "suc get cartIt");
@@ -144,13 +88,14 @@ public class CartViewModel extends ViewModel {
 
                 CartItemRepository.deleteById(idCart).enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                         Log.d(API_TAG, "suc del ");
                     }
 
                     @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
+                    public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                         Log.d(API_TAG, "no suc del ");
+                        Log.d(API_TAG, Arrays.toString(t.getStackTrace()));
                     }
                 });
 
@@ -158,12 +103,43 @@ public class CartViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<CartItem> call, Throwable t) {
+            public void onFailure(@NonNull Call<CartItem> call, @NonNull Throwable t) {
                 Log.d(API_TAG, "no suc get cartIt");
             }
         });
-
     }
+
+    public void postFavItem(long userId, long productId, Context context){
+
+        FavItemRepository.getFavItemByUserIdAndProductId(userId, productId).enqueue(new Callback<FavItem>() {
+            @Override
+            public void onResponse(@NonNull Call<FavItem> call, @NonNull Response<FavItem> response) {
+                if (response.body() != null) {
+                    Toast.makeText(context, "Товар уже есть в избранных", Toast.LENGTH_SHORT).show();
+                } else {
+                    FavItemRepository.insertFavItem(userId, productId).enqueue(new Callback<FavItem>() {
+                        @Override
+                        public void onResponse(@NonNull Call<FavItem> call, @NonNull Response<FavItem> response) {
+                            Log.d(API_TAG, "suc post fav item");
+                            Toast.makeText(context, "Товар в избранных", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<FavItem> call, @NonNull Throwable t) {
+                            Log.d(API_TAG, "suc post fav item");
+                            Toast.makeText(context, "Произошла ошибка", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<FavItem> call, @NonNull Throwable t) {
+
+            }
+        });
+    }
+
 
 
 }

@@ -32,6 +32,7 @@ public class FavouriteRecyclerViewHolder extends ViewHolder {
         binding.name.setText(item.getName());
         binding.price.setText(Long.toString(item.getPrice()));
         binding.getRoot().setOnClickListener(v -> listener.onClick(item.getId()));
+        binding.like.setOnClickListener(v -> listener.onDeleteClick(Integer.parseInt(Long.toString(item.getId()))));
     }
 
 

@@ -27,9 +27,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/like"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:background="@drawable/ic_favorite"
+        android:backgroundTint="@color/primary_green_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
@@ -45,7 +46,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageLayout"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:text="330 ₽" />
+        tools:text="330" />
+
+    <TextView
+        android:id="@+id/price_currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/price"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:text="@string/name_currency" />
 
     <TextView
         android:id="@+id/name"

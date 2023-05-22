@@ -54,4 +54,19 @@ public class FavouriteRecyclerAdapter extends Adapter<FavouriteRecyclerViewHolde
         this.items = new ArrayList<>(items);
         notifyItemRangeChanged(0, max(count, getItemCount()));
     }
+
+    public void removeProduct(int id) {
+        int position = -1;
+        for (int i = 0; i < items.size(); i++) {
+            Product product = items.get(i);
+            if (product.getId() == id) {
+                position = i;
+                break;
+            }
+        }
+        if (position != -1) {
+            items.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
 }

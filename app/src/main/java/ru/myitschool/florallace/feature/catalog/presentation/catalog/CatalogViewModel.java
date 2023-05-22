@@ -26,7 +26,7 @@ public class CatalogViewModel extends ViewModel {
 
     public void load(){
         _status.setValue(CatalogStatus.LOADING);
-        /*ProductsRepository.getProducts().enqueue(new Callback<List<Product>>() {
+        ProductsRepository.getProducts().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
                 _status.setValue(CatalogStatus.LOADED);
@@ -38,23 +38,23 @@ public class CatalogViewModel extends ViewModel {
                 _status.setValue(CatalogStatus.FAILURE);
                 throwable.printStackTrace();
             }
-        });*/
-
-        UsersRepository.getUserById(1L).enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                _status.setValue(CatalogStatus.LOADED);
-                if(response.body() == null) {
-                    throw new RuntimeException("User not found");
-                }
-                _products.setValue(response.body().getFavouriteProducts());
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<User> call, @NonNull Throwable throwable) {
-                _status.setValue(CatalogStatus.FAILURE);
-            }
         });
+
+//        UsersRepository.getUserById(1L).enqueue(new Callback<User>() {
+//            @Override
+//            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+//                _status.setValue(CatalogStatus.LOADED);
+//                if(response.body() == null) {
+//                    throw new RuntimeException("User not found");
+//                }
+//                _products.setValue(response.body().getFavouriteProducts());
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<User> call, @NonNull Throwable throwable) {
+//                _status.setValue(CatalogStatus.FAILURE);
+//            }
+//        });
 
 
     }

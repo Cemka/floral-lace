@@ -16,9 +16,8 @@ import ru.myitschool.florallace.databinding.FragmentCatalogBinding;
 import ru.myitschool.florallace.domain.model.Product;
 import ru.myitschool.florallace.feature.catalog.presentation.catalog.CatalogStatus;
 import ru.myitschool.florallace.feature.catalog.presentation.catalog.CatalogViewModel;
-import ru.myitschool.florallace.feature.catalog.ui.dialog.ProductBottomSheetDialog;
+import ru.myitschool.florallace.feature.dialog.ProductBottomSheetDialog;
 import ru.myitschool.florallace.feature.catalog.ui.recycler.CatalogAdapter;
-import ru.myitschool.florallace.feature.catalog.ui.recycler.CatalogClickListener;
 
 public class CatalogFragment extends Fragment {
 
@@ -26,6 +25,7 @@ public class CatalogFragment extends Fragment {
     private FragmentCatalogBinding binding;
     private CatalogAdapter adapter;
     private ProductBottomSheetDialog dialog;
+    private final static Long USER_ID = 1L;
 
 
     @Nullable
@@ -41,7 +41,7 @@ public class CatalogFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         adapter = new CatalogAdapter(id -> {
-            dialog = new ProductBottomSheetDialog(id);
+            dialog = new ProductBottomSheetDialog(id, USER_ID);
             dialog.show(requireActivity().getSupportFragmentManager(), "product");
 
         });
