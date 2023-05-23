@@ -27,5 +27,7 @@ public interface OrderItemApi {
     @POST("order_item/product/{order_id}")
     Call<List<OrderItem>> insertByListProductId(@Path("order_id") Long oderId,
                                                 @Body InsertReqBody insertReqBody);
+    @GET("order_item/user/{user_id}")
+    Call<List<OrderItem>> getByUserId(@Path("user_id") Long userId);
 
 }

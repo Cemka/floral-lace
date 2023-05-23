@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.myitschool.florallace.databinding.ItemOrderBinding;
+import ru.myitschool.florallace.feature.ordermaking.entity.NoDb;
 import ru.myitschool.florallace.feature.ordermaking.entity.OrderTime;
 
 public class OrderTimeRecyclerAdapter extends Adapter<OrderTimeRecyclerViewHolder> {
@@ -66,6 +67,8 @@ public class OrderTimeRecyclerAdapter extends Adapter<OrderTimeRecyclerViewHolde
         holder.root.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onItemClick(position);
+                NoDb.setTIME(items.get(position).getTime());
+                NoDb.setNameTime(items.get(position).getTimeName());
             }
         });
 

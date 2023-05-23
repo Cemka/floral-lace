@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import ru.myitschool.florallace.domain.model.Order;
@@ -33,7 +34,13 @@ public interface OrderApi {
             Long id
     );
 
-    @POST("orders/{order_items_id}")
-    Call<Order> insert(@Body Order order,
-                       @Query("order_items_id") List<Long> orderItemsIds);
+    @GET("orders/user/{user_id}")
+    Call<Order> getByUserId(@Path("user_id") Long userId);
+
+    @POST("orders")
+    Call<Order> insert(@Body Order order);
+
+    @PUT("orders/{id}")
+    Call<Order> updateById(@Path("id") Long orderId,
+                       @Body Order order);
 }

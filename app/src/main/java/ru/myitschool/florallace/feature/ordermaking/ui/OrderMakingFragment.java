@@ -1,7 +1,9 @@
 package ru.myitschool.florallace.feature.ordermaking.ui;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import ru.myitschool.florallace.R;
@@ -22,7 +25,9 @@ import ru.myitschool.florallace.databinding.FragmentMakingorderBinding;
 import ru.myitschool.florallace.domain.model.CartItem;
 import ru.myitschool.florallace.domain.model.User;
 import ru.myitschool.florallace.feature.main.ui.MainActivity;
+import ru.myitschool.florallace.feature.ordermaking.entity.NoDb;
 import ru.myitschool.florallace.feature.ordermaking.entity.OrderTime;
+import ru.myitschool.florallace.feature.ordermaking.presentation.OrderStatus;
 import ru.myitschool.florallace.feature.ordermaking.presentation.OrderViewModel;
 import ru.myitschool.florallace.feature.ordermaking.ui.cartitemsrecycler.CartItemRecyclerAdapter;
 import ru.myitschool.florallace.feature.ordermaking.ui.timerecycler.OrderTimeRecyclerAdapter;
@@ -34,18 +39,7 @@ public class OrderMakingFragment extends Fragment {
     private OrderTimeRecyclerAdapter adapterTime;
     private CartItemRecyclerAdapter cartItemAdapter;
     private OrderViewModel viewModel;
-    private String time;
-    private List<OrderTime> orderTimeList = new ArrayList<>();
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public void setNameTime(String nameTime) {
-        this.nameTime = nameTime;
-    }
-
-    private String nameTime;
+    private final List<OrderTime> orderTimeList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -64,6 +58,7 @@ public class OrderMakingFragment extends Fragment {
         return fragmentBinding.getRoot();
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -76,9 +71,6 @@ public class OrderMakingFragment extends Fragment {
         OrderTimeRecyclerClickListener listenerTime = new OrderTimeRecyclerClickListener() {
             @Override
             public void onClick(String time, String nameTime) {
-                setTime(time);
-                setNameTime(nameTime);
-
             }
 
             @Override
@@ -86,11 +78,38 @@ public class OrderMakingFragment extends Fragment {
                 adapterTime.onItemClick(position);
             }
         };
-        fragmentBinding.nameFragment.setOnClickListener(v -> viewModel.insertOrder(
-                MainActivity.USER_ID,
-                123,
-                "testloc",
-                "testtime"));
+
+        fragmentBinding.regOrder.setOnClickListener(v -> {
+
+            if (NoDb.TIME == null && NoDb.NAME_TIME == null) {
+                Toast.makeText(getContext(), "Определите время заказа", Toast.LENGTH_SHORT).show();
+            } else {
+                NavController navController = Navigation.findNavController(v);
+                Calendar calendar = Calendar.getInstance();
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int minute = calendar.get(Calendar.MINUTE);
+                int seconds = calendar.get(Calendar.SECOND);
+                String allTime = NoDb.TIME
+                        + NoDb.NAME_TIME
+                        + " Order time: "
+                        + "h:"
+                        + hour
+                        + " m:"
+                        + minute
+                        + " s:"
+                        + seconds;
+
+                viewModel.createOrderAndAddItems(123,
+                        "testloc",
+                        allTime,
+                        getContext(),
+                        MainActivity.USER_ID,
+                        navController
+                        );
+
+            }
+        });
+
         adapterTime = new OrderTimeRecyclerAdapter(listenerTime);
         adapterTime.setDefaultColor(Color.parseColor("#ACAAA8"));
         adapterTime.setSelectedColor(0xFF131313);
@@ -109,8 +128,8 @@ public class OrderMakingFragment extends Fragment {
         viewModel.loadUser();
         viewModel.loadCartItems();
 
-
     }
+
 
     @Override
     public void onDestroy() {
@@ -130,13 +149,15 @@ public class OrderMakingFragment extends Fragment {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private void renderCartItems(List<CartItem> cartItems) {
         cartItemAdapter.setProducts(cartItems);
         Integer allPrice = 0;
-        for(CartItem item : cartItems){
+        for (CartItem item : cartItems) {
             allPrice += item.getProduct().getPrice();
         }
         fragmentBinding.summaEnd.setText(Integer.toString(allPrice));
     }
+
 
 }

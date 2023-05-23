@@ -18,7 +18,6 @@ public class User {
 
     private List<CartItem> cartItems;
 
-    private Order userOrder;
 
     public User(Long id,
                 String phoneNumb,
@@ -35,7 +34,6 @@ public class User {
         this.countOfBonus = countOfBonus;
         this.favouriteProducts = favouriteProducts;
         this.cartItems = cartItems;
-        this.userOrder = userOrder;
     }
 
     public User(String phoneNumb,
@@ -51,7 +49,6 @@ public class User {
         this.countOfBonus = countOfBonus;
         this.favouriteProducts = favouriteProducts;
         this.cartItems = cartItems;
-        this.userOrder = userOrder;
     }
 
     public Long getId() {
@@ -82,9 +79,6 @@ public class User {
         return cartItems;
     }
 
-    public Order getUserOrder() {
-        return userOrder;
-    }
 
     @Override
     public String toString() {
@@ -96,7 +90,6 @@ public class User {
                 ", countOfBonus=" + countOfBonus +
                 ", favouriteProducts=" + favouriteProducts +
                 ", productsInCart=" + cartItems +
-                ", userOrder=" + userOrder +
                 '}';
     }
 

@@ -30,4 +30,8 @@ public class OrderItemRepository {
     public static Call<OrderItem> getById(Long orderId){
         return OrderItemApiService.instance().getById(orderId);
     }
+
+    public static Call<List<OrderItem>> getByUserId (Long userId){
+        return OrderItemApiService.instance().getByUserId(userId);
+    }
 }

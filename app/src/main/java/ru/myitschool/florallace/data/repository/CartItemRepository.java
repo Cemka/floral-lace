@@ -8,6 +8,7 @@ import ru.myitschool.florallace.data.api.cartitem.CartItemApiService;
 import ru.myitschool.florallace.data.api.order.OrderApiService;
 import ru.myitschool.florallace.domain.model.CartItem;
 import ru.myitschool.florallace.domain.model.Order;
+import ru.myitschool.florallace.feature.ordermaking.entity.DelReqBody;
 
 public class CartItemRepository {
 
@@ -17,6 +18,10 @@ public class CartItemRepository {
 
     public static Call<Void> deleteById(Long id) {
         return CartItemApiService.instance().deleteCartItem(id);
+    }
+
+    public static Call<Void> deleteAllById(DelReqBody body) {
+        return CartItemApiService.instance().deleteAllById(body);
     }
 
     public static Call<CartItem> insertCartItem(Long userId,

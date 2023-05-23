@@ -48,8 +48,8 @@ public class OrderTimeRecyclerViewHolder extends ViewHolder {
             fullTime = "Через 2 часа";
         }
         binding.nameTime.setText(fullTime);
-        binding.getRoot().setOnClickListener(v -> {
-            listener.onClick(time, nameTime);
+        binding.nameTime.setOnClickListener(s -> {
+            listener.onClick(item.getTime(), item.getTimeName());
         });
     }
 

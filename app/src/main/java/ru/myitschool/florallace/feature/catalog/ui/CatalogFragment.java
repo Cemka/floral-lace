@@ -18,6 +18,7 @@ import ru.myitschool.florallace.feature.catalog.presentation.catalog.CatalogStat
 import ru.myitschool.florallace.feature.catalog.presentation.catalog.CatalogViewModel;
 import ru.myitschool.florallace.feature.dialog.ProductBottomSheetDialog;
 import ru.myitschool.florallace.feature.catalog.ui.recycler.CatalogAdapter;
+import ru.myitschool.florallace.feature.ordermaking.entity.NoDb;
 
 public class CatalogFragment extends Fragment {
 
@@ -33,6 +34,8 @@ public class CatalogFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(CatalogViewModel.class);
         binding = FragmentCatalogBinding.inflate(inflater);
+        NoDb.TIME = null;
+        NoDb.NAME_TIME = null;
         return binding.getRoot();
     }
 
