@@ -23,4 +23,18 @@ public class UsersRepository {
     public static Call<User> updateUser(Long id, User user){
         return UserApiService.getInstance().uploadUser(id, user);
     }
+
+    public static Call<User> getUserByPasAndPhoneNumb(String password, String phoneNumb){
+        return UserApiService.getInstance().getUserByPasAndPhoneNumb(password, phoneNumb);
+    }
+
+    public static Call<User> insert(String phoneNumb,
+                                    String firstName,
+                                    String secondName,
+                                    String countBonus,
+                                    String password){
+        return UserApiService.getInstance().insert(phoneNumb,
+                firstName, secondName,
+                countBonus, password);
+    }
 }

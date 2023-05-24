@@ -40,21 +40,7 @@ public class CatalogViewModel extends ViewModel {
             }
         });
 
-//        UsersRepository.getUserById(1L).enqueue(new Callback<User>() {
-//            @Override
-//            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-//                _status.setValue(CatalogStatus.LOADED);
-//                if(response.body() == null) {
-//                    throw new RuntimeException("User not found");
-//                }
-//                _products.setValue(response.body().getFavouriteProducts());
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call<User> call, @NonNull Throwable throwable) {
-//                _status.setValue(CatalogStatus.FAILURE);
-//            }
-//        });
+
 
 
     }

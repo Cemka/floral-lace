@@ -40,4 +40,17 @@
     <string name="name_time">Заберу через:</string>
     <string name="name_make_order">Оформить!</string>
     <string name="order">Заказ</string>
+    <string name="name_auth">Авторизация</string>
+    <string name="name_phone_numb">Введите номер телефона</string>
+    <string name="name_pas">Введите пароль</string>
+    <string name="name_sec_name">Введите вашу фамилию</string>
+    <string name="name_fir">Введите ваше имя</string>
+    <string name="name_login">Войти</string>
+    <string name="name_regIn">Зарегистрироваться</string>
+    <string name="name_reg">Регистрация</string>
+    <string name="pas_contains_eight">Содержит более 8 символов</string>
+    <string name="contain_caps_letter">Содержит прописную букву</string>
+    <string name="contain_two_let">Содержит не менее двух букв</string>
+    <string name="format_phone">Формат: 8800553535</string>
+    <string name="name_exit_from_profile">Выйти из профиля</string>
 </resources>

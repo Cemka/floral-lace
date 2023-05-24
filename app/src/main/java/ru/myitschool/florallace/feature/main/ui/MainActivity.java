@@ -22,19 +22,23 @@ import ru.myitschool.florallace.data.repository.UsersRepository;
 import ru.myitschool.florallace.databinding.ActivityMainBinding;
 import ru.myitschool.florallace.domain.model.Product;
 import ru.myitschool.florallace.domain.model.User;
+import ru.myitschool.florallace.feature.registration.reg.presentation.AuthManager;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    public static final Long USER_ID = 1L;
+    public static Long USER_ID;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AuthManager manager = new AuthManager(getBaseContext());
+        USER_ID = manager.getUserId();
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         BottomNavigationView navigationView = findViewById(R.id.bottom_nav_bar);
 
@@ -56,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        UsersRepository.getUserById(1L).enqueue(new Callback<User>() {
+        UsersRepository.getUserById(MainActivity.USER_ID).enqueue(new Callback<User>() {
             @Override
             public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if(response.body() == null) {

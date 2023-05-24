@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/nameFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/name_reg"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit_text_phone_numb"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:hint="@string/name_phone_numb"
+        android:inputType="phone"
+        android:maxLength="11"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/nameFragment" />
+
+    <TextView
+        android:id="@+id/format_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textColor="?attr/colorSecondaryVariant"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_phone_numb"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        android:layout_marginStart="3dp"
+        android:text="@string/format_phone"
+        />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit_text_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="@string/name_pas"
+        android:inputType="textPassword"
+        android:maxLength="32"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/format_phone" />
+
+
+    <TextView
+        android:id="@+id/eight_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_password"
+        android:text="@string/pas_contains_eight"
+        android:textColor="@color/primary_red_color"
+        android:layout_marginStart="3dp"/>
+
+    <TextView
+        android:id="@+id/contains_letters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/eight_num"
+        android:text="@string/contain_two_let"
+        android:textColor="@color/primary_red_color"
+        android:layout_marginStart="3dp"/>
+
+    <TextView
+        android:id="@+id/contains_caps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/contains_letters"
+        android:text="@string/contain_caps_letter"
+        android:textColor="@color/primary_red_color"
+        android:layout_marginStart="3dp"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit_text_fir_name"
+        android:layout_width="0dp"
+        android:maxLength="20"
+        android:layout_height="wrap_content"
+        android:hint="@string/name_fir"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintTop_toBottomOf="@id/contains_caps"
+        android:layout_marginTop="5dp"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit_text_sec_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLength="20"
+        android:hint="@string/name_sec_name"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_fir_name"
+        android:layout_marginTop="10dp"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_reg"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bg_button_type_fir"
+        android:backgroundTint="@color/primary_green_color"
+        android:text="@string/name_regIn"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_sec_name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

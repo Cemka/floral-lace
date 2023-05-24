@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView.OnQueryTextListener;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ru.myitschool.florallace.databinding.FragmentCatalogBinding;
@@ -18,6 +20,7 @@ import ru.myitschool.florallace.feature.catalog.presentation.catalog.CatalogStat
 import ru.myitschool.florallace.feature.catalog.presentation.catalog.CatalogViewModel;
 import ru.myitschool.florallace.feature.dialog.ProductBottomSheetDialog;
 import ru.myitschool.florallace.feature.catalog.ui.recycler.CatalogAdapter;
+import ru.myitschool.florallace.feature.main.ui.MainActivity;
 import ru.myitschool.florallace.feature.ordermaking.entity.NoDb;
 
 public class CatalogFragment extends Fragment {
@@ -26,7 +29,8 @@ public class CatalogFragment extends Fragment {
     private FragmentCatalogBinding binding;
     private CatalogAdapter adapter;
     private ProductBottomSheetDialog dialog;
-    private final static Long USER_ID = 1L;
+    private List<Product> allProducts;
+    private final static Long USER_ID = MainActivity.USER_ID;
 
 
     @Nullable
@@ -49,8 +53,22 @@ public class CatalogFragment extends Fragment {
 
         });
 
+        binding.search.setOnQueryTextListener(new OnQueryTextListener() {
+                                                  @Override
+                                                  public boolean onQueryTextSubmit(String query) {
+                                                      performSearch(query);
+                                                      return true;
+                                                  }
 
-        binding.recyclerCatalog.setAdapter(adapter);
+                                                  @Override
+                                                  public boolean onQueryTextChange(String newText) {
+                                                      performSearch(newText);
+                                                      return true;
+                                                  }
+                                              });
+
+
+                binding.recyclerCatalog.setAdapter(adapter);
         viewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
         viewModel.products.observe(getViewLifecycleOwner(), this::renderProducts);
         if(savedInstanceState == null) viewModel.load();
@@ -80,8 +98,24 @@ public class CatalogFragment extends Fragment {
     }
 
     private void renderProducts(List<Product> products){
+        allProducts = products;
         binding.empty.setVisibility(products.isEmpty() ? View.VISIBLE : View.INVISIBLE);
         adapter.setProducts(products);
+    }
+
+    private void performSearch(String query) {
+        if (allProducts == null || allProducts.isEmpty()) {
+            return;
+        }
+
+        List<Product> searchResults = new ArrayList<>();
+        for (Product product : allProducts) {
+            if (product.getName().toLowerCase().contains(query.toLowerCase())) {
+                searchResults.add(product);
+            }
+        }
+
+        adapter.setProducts(searchResults);
     }
 
     @Override
